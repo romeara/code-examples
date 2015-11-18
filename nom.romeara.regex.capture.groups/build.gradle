@@ -1,0 +1,33 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+eclipse {
+	classpath {
+		downloadSources=true
+		containers = [ 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8' ]
+	}
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Regex Capture Groups Example',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.5'
+    
+    runtime group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.7'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+}

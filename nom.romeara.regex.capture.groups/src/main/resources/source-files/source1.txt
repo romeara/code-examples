@@ -1,0 +1,1 @@
+Regex Should Capture Capitals but not the lowercase followup
