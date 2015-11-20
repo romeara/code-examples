@@ -1,0 +1,85 @@
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "org.sonarqube.gradle:gradle-sonarqube-plugin:1.1"
+  }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.sonarqube'
+apply plugin: 'jacoco'
+
+//NOTE: If using Sonar of an earlier version than 5.x, the findbugs plug-in MUST be updated to 3.x or later in order to support Java 8
+sourceCompatibility = 1.8
+
+group = 'nom.romeara'
+version = '0.1-SNAPSHOT'
+
+sourceSets{
+	example
+}
+
+eclipse {
+	classpath {
+		plusConfigurations += [ configurations.exampleCompile, configurations.exampleRuntime ]
+		downloadSources=true
+		containers = [ 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8' ]
+	}
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Query Construction',
+                   'Implementation-Version': version
+    }
+}
+
+task sourcesJar(type:Jar){
+	from sourceSets.main.allSource
+	classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+task listAllDependencies(type: DependencyReportTask) {}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.5'
+    compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
+    compile group: 'org.postgresql', name: 'postgresql', version: '9.2-1004-jdbc4'
+    compile group: 'com.google.guava', name: 'guava', version: '18.0'
+    
+    exampleCompile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.5'
+    
+    exampleRuntime group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.7'
+    
+    testCompile group: 'org.testng', name: 'testng', version: '6.8.5'
+    
+    testRuntime group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.7'
+}
+
+test{
+	useTestNG() {}
+}
+
+artifacts {
+	archives sourcesJar
+	archives javadocJar
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+}

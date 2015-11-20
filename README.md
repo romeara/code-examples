@@ -20,3 +20,17 @@ Demonstrates how to selectively capture content via regex pattern
 #### Additional Examples in this App
 
 * Reading file content from the classpath of the project in a way which continues to work after being packaged into a jar archive
+
+### Query Construction
+
+Demonstrates syntax for a PostgreSQL values statement
+
+#### Additional Examples in this App
+
+* Gradle support of code coverage (JaCoCo)
+* Gradle support of code quality tools (sonarqube)
+* Gradle custom source sets
+* Adding compile/runtime dependencies for a source set
+* Gradle configuration of Eclipse project values
+* Gradle listing dependency trees
+* Sonar 4.5.6 support for Java 8 (comment in build file)
