@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
+
 group = 'com.rsomeara'
 version = '1.0'
 
@@ -14,7 +15,7 @@ eclipse {
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'Artifact Repository Available Versions Reader',
+        attributes 'Implementation-Title': 'Regex Capture Groups Example',
                    'Implementation-Version': version
     }
 }
@@ -24,15 +25,11 @@ repositories {
 }
 
 dependencies {
-    compile group: 'com.google.guava', name: 'guava', version: '18.0'
-    compile group: 'args4j', name: 'args4j', version: '2.32'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.5'
-    compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
-    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     
     runtime group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.7'
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.5'
+    gradleVersion = '2.6'
 }
