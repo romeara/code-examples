@@ -1,0 +1,38 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+group: 'com.rsomeara'
+version = '1.0'
+
+eclipse {
+	classpath {
+		downloadSources=true
+		containers = [ 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8' ]
+	}
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Artifact Repository Available Versions Reader',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.google.guava', name: 'guava', version: '18.0'
+    compile group: 'args4j', name: 'args4j', version: '2.32'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.5'
+    compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    
+    runtime group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.7'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.5'
+}
