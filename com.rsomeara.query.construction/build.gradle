@@ -72,6 +72,24 @@ dependencies {
 }
 
 test{
+
+	//Enhance the Gradle output of test results to be more directly useful, instead of just pointing the client to a report file
+	testLogging {
+    	exceptionFormat 'full'
+
+    	quiet {
+        	events 'failed'
+    	}
+    	
+    	info {
+        	events 'skipped', 'failed', 'passed'
+    	}
+    	
+    	debug {
+        	events 'started', 'standard_out', 'standard_error', 'skipped', 'failed', 'passed'
+    	}
+	}
+    	
 	useTestNG() {}
 }
 

@@ -11,4 +11,5 @@ Provides an example of constructing a values statement for a PostgreSQL query an
 * Adding compile/runtime dependencies for a source set
 * Gradle configuration of Eclipse project values
 * Gradle listing dependency trees
+* Gradle ehancement of test run output on the command line
 * Sonar 4.5.6 support for Java 8 (comment in build file)
