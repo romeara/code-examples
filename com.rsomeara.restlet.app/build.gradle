@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+version = '0.1'
+
+eclipse {
+	classpath {
+		downloadSources=true
+		containers = [ 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8' ]
+	}
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Basic Restlet Application Example',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+	maven { url "https://maven.restlet.com" }
+    mavenCentral()
+}
+
+dependencies {
+	compile group: 'org.restlet.jse', name: 'org.restlet', version: '2.3.4'
+	compile group: 'javax.inject', name: 'javax.inject', version: '1'
+	compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
+	compile group: 'org.springframework', name: 'spring-context', version: '4.2.5.RELEASE'
+	compile group: 'args4j', name: 'args4j', version: '2.33'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+}
