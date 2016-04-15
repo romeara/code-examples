@@ -10,6 +10,12 @@ import org.kohsuke.args4j.Option;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 
+/**
+ * Simple main class which starts up the Restlet component hosting the sample application
+ *
+ * @author romeara
+ * @since 0.1
+ */
 public class Main {
 
     @Option(name = "--port", usage = "Port to start the example servlet on", required = false)
@@ -43,9 +49,16 @@ public class Main {
             e.printStackTrace();
         }
 
+        // Add a shutdown process so that when the JVM is shut down, the Restlet component also shuts down gracefully
         Runtime.getRuntime().addShutdownHook(new Thread(new RestletShutdownProcess(component)));
     }
 
+    /**
+     * Task which will stop the component
+     *
+     * @author romeara
+     * @since 0.1
+     */
     private static final class RestletShutdownProcess implements Runnable {
 
         private final Component restletComponent;

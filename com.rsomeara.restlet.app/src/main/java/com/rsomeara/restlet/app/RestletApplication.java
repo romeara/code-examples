@@ -8,10 +8,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.rsomeara.restlet.app.resource.impl.HelloServerResource;
 import com.rsomeara.restlet.app.service.impl.HelloSpringConfiguration;
 
+/**
+ * A definition of a related set of services and resources
+ *
+ * @author romeara
+ * @since 0.1
+ */
 public class RestletApplication extends Application {
-
-    public RestletApplication() {
-    }
 
     @Override
     public Restlet createInboundRoot() {
@@ -28,6 +31,10 @@ public class RestletApplication extends Application {
         return router;
     }
 
+    /**
+     * Sets up a spring application context within the Restlet context, and sets a Finder capable of utilizing it when
+     * looking up server resource instances
+     */
     private void configureSpringInjection() {
         getContext().getAttributes().put(SpringContextFinder.SPRING_CONTEXT_ATTRIBUTE_KEY,
                 new AnnotationConfigApplicationContext(HelloSpringConfiguration.class));
