@@ -45,3 +45,12 @@ Demonstrates filtering access to a Jetty server based on IP address
 * Lookup of a random open port on the local machine
 * Use of Jetty handlers
 * Redirecting requests based on IP filtering to a specified location
+
+### Restlet
+
+Demonstrates a simple Restlet application
+
+#### Additional Examples in this App
+
+* Setup of a simple Restlet application with an end point
+* Setup of dependency injection support for end point implementations using spring autowiring
