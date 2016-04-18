@@ -48,7 +48,7 @@ public class SpringContextFinder extends Finder {
         if (springContext != null) {
             // Try to lookup an existing bean before creating a new one
             try {
-                resource = springContext.getAutowireCapableBeanFactory().getBean(targetClass);
+                resource = springContext.getBean(targetClass);
             } catch (NoSuchBeanDefinitionException e) {
                 resource = springContext.getAutowireCapableBeanFactory().createBean(targetClass);
             }
