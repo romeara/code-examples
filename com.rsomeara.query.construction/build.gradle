@@ -29,7 +29,14 @@ eclipse {
 	classpath {
 		plusConfigurations += [ configurations.exampleCompile, configurations.exampleRuntime ]
 		downloadSources=true
-		containers = [ "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-${sourceCompatibility}" ]
+		
+		//Replace the default container, instead of overwriting ALL containers with the desired one
+		containers.forEach{
+			if("org.eclipse.jdt.launching.JRE_CONTAINER".equals(it)){
+				containers.remove(it)
+				containers.add("org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-${sourceCompatibility}") 
+			}
+		}
 	}
 }
 
