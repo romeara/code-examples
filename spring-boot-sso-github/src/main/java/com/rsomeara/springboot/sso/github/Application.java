@@ -13,8 +13,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +24,7 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
+import org.springframework.security.oauth2.common.AuthenticationScheme;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -45,7 +44,7 @@ import org.springframework.web.filter.CompositeFilter;
 public class Application extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    OAuth2ClientContext oauth2ClientContext;
+    private OAuth2ClientContext oauth2ClientContext;
 
     @RequestMapping({ "/user", "/me" })
     public Map<String, String> user(Principal principal) {
@@ -90,21 +89,14 @@ public class Application extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    @ConfigurationProperties("github")
+    // @ConfigurationProperties("github")
     public ClientResources github() {
-        return new ClientResources();
-    }
-
-    @Bean
-    @ConfigurationProperties("facebook")
-    public ClientResources facebook() {
         return new ClientResources();
     }
 
     private Filter ssoFilter() {
         CompositeFilter filter = new CompositeFilter();
         List<Filter> filters = new ArrayList<>();
-        filters.add(ssoFilter(facebook(), "/login/facebook"));
         filters.add(ssoFilter(github(), "/login/github"));
         filter.setFilters(filters);
         return filter;
@@ -126,11 +118,21 @@ public class Application extends WebSecurityConfigurerAdapter {
 
 class ClientResources {
 
-    @NestedConfigurationProperty
+    // @NestedConfigurationProperty
     private AuthorizationCodeResourceDetails client = new AuthorizationCodeResourceDetails();
 
-    @NestedConfigurationProperty
+    // @NestedConfigurationProperty
     private ResourceServerProperties resource = new ResourceServerProperties();
+
+    public ClientResources() {
+        client.setClientId("bd1c0a783ccdd1c9b9e4");
+        client.setClientSecret("1a9030fbca47a5b2c28e92f19050bb77824b5ad1");
+        client.setAccessTokenUri("https://github.com/login/oauth/access_token");
+        client.setUserAuthorizationUri("https://github.com/login/oauth/authorize");
+        client.setClientAuthenticationScheme(AuthenticationScheme.form);
+
+        resource.setUserInfoUri("https://api.github.com/user");
+    }
 
     public AuthorizationCodeResourceDetails getClient() {
         return client;
