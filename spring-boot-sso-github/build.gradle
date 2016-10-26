@@ -1,0 +1,56 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.8
+version = '0.1'
+
+eclipse {
+	classpath {
+		downloadSources=true
+		containers = [ 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8' ]
+	}
+}
+
+repositories {
+		mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'GitHub SSO Example With Spring Boot',
+                   'Implementation-Version': version
+    }
+}
+
+dependencies {	
+	compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-configuration-processor'
+    
+    compile 'org.springframework.security.oauth:spring-security-oauth2'
+    
+    compile 'org.webjars:angularjs:1.4.3'
+    compile 'org.webjars:jquery:2.1.1'
+    compile 'org.webjars:bootstrap:3.2.0'
+    compile 'org.webjars:webjars-locator'
+}
+
+//Tasks which allow investigation of dependencies
+task dependencyReport(type: DependencyReportTask) << {}
+
+task dependencyInsightReport(type: DependencyInsightReportTask) << {}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1'
+}
