@@ -1,5 +1,7 @@
 package com.rsomeara.springboot.sso.github;
 
+import java.util.Arrays;
+
 import javax.servlet.Filter;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,6 +37,8 @@ public class OAuthConfiguration {
         client.setAccessTokenUri("https://github.com/login/oauth/access_token");
         client.setUserAuthorizationUri("https://github.com/login/oauth/authorize");
         client.setClientAuthenticationScheme(AuthenticationScheme.form);
+
+        client.setScope(Arrays.asList("public_repo"));
 
         return client;
     }
