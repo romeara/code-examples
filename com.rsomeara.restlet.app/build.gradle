@@ -1,16 +1,5 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven { url "http://jcenter.bintray.com" }
-    }
-    dependencies {
-        classpath group: 'com.blackducksoftware.integration', name: 'hub-gradle-plugin', version: '2.1.0'
-    }
-}
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'com.blackducksoftware.hub'
 
 sourceCompatibility = 1.8
 version = '0.1'
