@@ -13,6 +13,10 @@ Demonstrates how to communicate with JCenter REST APIs to get version info for a
 * Adding HTTP Basic Communication to a URLConnection or extension thereof
 * Use the JSON-Simple library for basic JSON return parsing
 
+### Spring Boot GitHub SSO
+
+Demonstrates how to use spring security to implement "Login with GitHub"
+
 ### Regex Capture Groups
 
 Demonstrates how to selectively capture content via regex pattern
