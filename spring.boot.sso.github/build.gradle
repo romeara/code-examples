@@ -25,6 +25,10 @@ repositories {
 		mavenCentral()
 }
 
+bootRun {
+   jvmArgs = [ "-Xdebug", "-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n" ]
+}
+
 jar {
     manifest {
         attributes 'Implementation-Title': 'GitHub SSO Example With Spring Boot',
@@ -33,7 +37,7 @@ jar {
 }
 
 dependencies {	
-	compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.springframework.boot:spring-boot-starter-security'
     compile 'org.springframework.boot:spring-boot-configuration-processor'

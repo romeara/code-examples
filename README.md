@@ -13,6 +13,10 @@ Demonstrates how to communicate with JCenter REST APIs to get version info for a
 * Adding HTTP Basic Communication to a URLConnection or extension thereof
 * Use the JSON-Simple library for basic JSON return parsing
 
+### Spring Boot GitHub SSO
+
+Demonstrates how to use spring security to implement "Login with GitHub"
+
 ### Regex Capture Groups
 
 Demonstrates how to selectively capture content via regex pattern
@@ -54,3 +58,14 @@ Demonstrates a simple Restlet application
 
 * Setup of a simple Restlet application with an end point
 * Setup of dependency injection support for end point implementations using spring autowiring
+
+### Mail
+
+Demonstrates use of the Java Mail APIs
+
+#### Additional Examples in this App
+
+* Basic sending of mail from one address to another use the Java Mail APIs
+* Specifying the format of the e-mail as HTML
+* Use of args4j to get the relay location
+* Use of callback handler to get the email to send from and to at runtime
