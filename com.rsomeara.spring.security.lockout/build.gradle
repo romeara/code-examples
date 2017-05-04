@@ -1,0 +1,45 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+            mavenCentral()
+        }
+    }
+    dependencies {
+        classpath group: 'com.netflix.nebula', name: 'nebula-dependency-recommender', version: '3.6.3'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'nebula.dependency-recommender'
+
+dependencyRecommendations {
+    dependencyLock file: file("${rootDir}/dependencies.lock")
+}
+
+version = "0.1.0-SNAPSHOT"
+group = 'com.rsomeara'
+
+sourceCompatibility = 1.8
+
+//Always download sources, to allow debugging, and use Eclipse containers for greater portability
+eclipse {
+    classpath {
+        downloadSources=true
+        containers = [ "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-${sourceCompatibility}".toString() ]
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.2.1'
+}
