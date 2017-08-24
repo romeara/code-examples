@@ -38,6 +38,9 @@ repositories {
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+    compile group: 'org.springframework.security', name: 'spring-security-core'
+    compile group: 'org.springframework.security', name: 'spring-security-web'
+    compile group: 'org.springframework.security', name: 'spring-security-config'
 }
 
 task wrapper(type: Wrapper) {
